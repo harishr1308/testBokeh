@@ -26,10 +26,10 @@ def index(request):
     plot.line(x, y, legend='f(x)', line_width=2)
     # Store components
     script, div = components(plot)
-
+    variables = {'script': script, 'div': div}
     # Feed them to the Django template.
     return render(request=request, template_name='index.html',
-                  context={'script': script, 'div': div})
+                  context=variables)
 
 
 def general_plot(request):
@@ -89,7 +89,9 @@ def general_plot(request):
     graph_layout = layout([[plot], [widgets]])
 
     script, div = components(graph_layout)
-    return render(request=request, template_name='general_plot.html', context={'script': script, 'div': div})
+    variables = {'script': script, 'div': div}
+
+    return render(request=request, template_name='general_plot.html', context=variables)
 
 
 def world_plot(request):
@@ -131,7 +133,8 @@ def world_plot(request):
     #         print(attribute['title'], path)
 
     script, div = components(p)
-    return render(request=request, template_name='world_plot.html', context={'script': script, 'div': div})
+    variables = {'script': script, 'div': div}
+    return render(request=request, template_name='world_plot.html', context=variables)
 
 
 def world_plot_json(request):
@@ -169,4 +172,5 @@ def world_plot_json(request):
     p.y_range = Range1d(start=-90, end=90)
 
     script, div = components(p)
-    return render(request=request, template_name='world_plot.html', context={'script': script, 'div': div})
+    variables = {'script': script, 'div': div}
+    return render(request=request, template_name='world_plot.html', context=variables)
